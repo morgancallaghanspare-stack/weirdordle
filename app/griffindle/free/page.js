@@ -1,4 +1,8 @@
 "use client";
+
+import { supabase } from "../../../lib/supabase";
+import { recordGameResult } from "../../../lib/auth";
+
 import { useState, useEffect, useCallback } from "react";
 
 const PUZZLES = [
@@ -280,6 +284,7 @@ export default function App() {
     setGuesses(next); setInput("");
     if (ok) {
       setState("won"); setRevealed(puzzle.clues.length);
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"griffindle-free",won:true}); });
       setStreak(s=>s+1); setWins(w=>w+1); setGamesPlayed(g=>g+1);
       setTimeout(()=>setShowResult(true),600);
     } else {

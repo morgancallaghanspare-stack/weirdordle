@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+
+const AuthModal = dynamic(() => import("../components/AuthModal"), { ssr: false });
 
 const categories = [
   {
     id: "phasmodle",
-    name: "phasmodle",
+    name: "Phasmodle",
     subtitle: "Guess the Ghost",
     image: "/images/hub/ghosts.jpeg",
     emoji: "👻",
@@ -170,7 +173,6 @@ function CategoryCard({ cat, index }) {
       <div style={{ position:"absolute",inset:0,opacity:0.03,backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",pointerEvents:"none" }} />
       <div style={{ position:"absolute",top:"-30%",right:"-20%",width:"65%",height:"65%",background:cat.color,borderRadius:"50%",filter:"blur(60px)",opacity:hovered?0.28:0.12,transition:"opacity 0.35s ease",pointerEvents:"none" }} />
 
-      {/* Image area */}
       <div style={{ width:"100%",height:"160px",position:"relative",overflow:"hidden",background:`linear-gradient(180deg,${cat.color}22 0%,transparent 100%)`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>
         {cat.image ? (
           <img src={cat.image} alt={cat.name} style={{ width:"100%",height:"100%",objectFit:"cover",filter:hovered?"brightness(1) saturate(1)":"brightness(0.7) saturate(0.75)",transition:"all 0.35s ease",transform:hovered?"scale(1.06)":"scale(1)" }} />
@@ -184,14 +186,13 @@ function CategoryCard({ cat, index }) {
         <div style={{ position:"absolute",bottom:0,left:0,right:0,height:"55px",background:"linear-gradient(transparent,#080808)",pointerEvents:"none" }} />
       </div>
 
-      {/* Text */}
       <div style={{ padding:"14px 20px 20px",position:"relative",zIndex:1,flex:1,display:"flex",flexDirection:"column" }}>
         <div style={{ fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"clamp(1.5rem,3vw,1.9rem)",fontWeight:900,color:"#fff",letterSpacing:"0.03em",lineHeight:1,marginBottom:"3px" }}>{cat.name}</div>
         <div style={{ fontFamily:"'Courier New',monospace",fontSize:"0.64rem",color:cat.accent,letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:"10px",opacity:0.85 }}>{cat.subtitle}</div>
         <p style={{ fontFamily:"Georgia,serif",fontSize:"0.8rem",color:"rgba(255,255,255,0.48)",lineHeight:1.55,margin:"0 0 16px 0",flex:1 }}>{cat.description}</p>
         <div style={{ display:"flex",gap:"8px" }}>
-         <a href={`/${cat.id}`} style={{ flex:1,padding:"10px 0",borderRadius:"8px",border:"none",background:cat.color,color:"#fff",fontFamily:"'Courier New',monospace",fontSize:"0.7rem",fontWeight:"bold",letterSpacing:"0.1em",cursor:"pointer",textDecoration:"none",display:"flex",alignItems:"center",justifyContent:"center" }}>📅 DAILY</a>
-<a href={`/${cat.id}/free`} style={{ flex:1,padding:"10px 0",borderRadius:"8px",border:`1px solid ${cat.color}88`,background:"rgba(255,255,255,0.04)",color:cat.accent,fontFamily:"'Courier New',monospace",fontSize:"0.7rem",fontWeight:"bold",letterSpacing:"0.1em",cursor:"pointer",textDecoration:"none",display:"flex",alignItems:"center",justifyContent:"center" }}>∞ FREE PLAY</a>
+          <a href={`/${cat.id}`} style={{ flex:1,padding:"10px 0",borderRadius:"8px",border:"none",background:cat.color,color:"#fff",fontFamily:"'Courier New',monospace",fontSize:"0.7rem",fontWeight:"bold",letterSpacing:"0.1em",cursor:"pointer",textDecoration:"none",display:"flex",alignItems:"center",justifyContent:"center" }}>📅 DAILY</a>
+          <a href={`/${cat.id}/free`} style={{ flex:1,padding:"10px 0",borderRadius:"8px",border:`1px solid ${cat.color}88`,background:"rgba(255,255,255,0.04)",color:cat.accent,fontFamily:"'Courier New',monospace",fontSize:"0.7rem",fontWeight:"bold",letterSpacing:"0.1em",cursor:"pointer",textDecoration:"none",display:"flex",alignItems:"center",justifyContent:"center" }}>∞ FREE PLAY</a>
         </div>
       </div>
 
@@ -228,7 +229,8 @@ function FloatingParticle({ cat, delay, x, size, rotation }) {
 }
 
 export default function App() {
-  const [showHelp, setShowHelp] = useState(false);
+  const [showHelp,        setShowHelp]        = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   return (
     <div style={{ minHeight:"100vh",background:"#080808",color:"#fff",fontFamily:"Georgia,serif",position:"relative",overflowX:"hidden" }}>
@@ -252,14 +254,25 @@ export default function App() {
 
       {PARTICLE_CONFIG.map((p,i) => <FloatingParticle key={i} cat={categories[p.catIndex]} x={p.x} delay={p.delay} size={p.size} rotation={p.rotation} />)}
 
-      {/* ? button — top right corner */}
-      <button onClick={() => setShowHelp(true)} style={{ position:"fixed",top:"16px",right:"16px",zIndex:150,width:"36px",height:"36px",borderRadius:"50%",border:"1px solid rgba(255,255,255,0.2)",background:"rgba(255,255,255,0.07)",color:"rgba(255,255,255,0.7)",fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"1.2rem",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",backdropFilter:"blur(6px)",transition:"all 0.2s" }}>?</button>
+      {/* Fixed top-right buttons */}
+      <div style={{ position:"fixed",top:"16px",right:"16px",zIndex:150,display:"flex",gap:"8px",alignItems:"center" }}>
+        {/* Leaderboard button */}
+        <button
+          onClick={() => setShowLeaderboard(true)}
+          style={{ width:"36px",height:"36px",borderRadius:"50%",border:"1px solid rgba(255,255,255,0.2)",background:"rgba(255,255,255,0.07)",color:"rgba(255,255,255,0.7)",fontSize:"1rem",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",backdropFilter:"blur(6px)",transition:"all 0.2s" }}
+        >🏆</button>
+        {/* How to play button */}
+        <button
+          onClick={() => setShowHelp(true)}
+          style={{ width:"36px",height:"36px",borderRadius:"50%",border:"1px solid rgba(255,255,255,0.2)",background:"rgba(255,255,255,0.07)",color:"rgba(255,255,255,0.7)",fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"1.2rem",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",backdropFilter:"blur(6px)",transition:"all 0.2s" }}
+        >?</button>
+      </div>
 
-      {showHelp && <HowToPlayModal onClose={() => setShowHelp(false)} />}
+      {showHelp        && <HowToPlayModal onClose={() => setShowHelp(false)} />}
+      {showLeaderboard && <AuthModal      onClose={() => setShowLeaderboard(false)} />}
 
       <div style={{ position:"relative",zIndex:1,maxWidth:"1140px",margin:"0 auto",padding:"clamp(24px,5vw,64px) clamp(16px,4vw,40px)" }}>
 
-        {/* Header */}
         <div style={{ textAlign:"center",marginBottom:"clamp(40px,6vw,72px)" }}>
           <div style={{ display:"inline-flex",alignItems:"center",gap:"7px",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"20px",padding:"5px 16px",marginBottom:"22px",fontFamily:"'Courier New',monospace",fontSize:"0.62rem",letterSpacing:"0.18em",color:"rgba(255,255,255,0.45)" }}>
             <span style={{ width:"6px",height:"6px",borderRadius:"50%",background:"#4CAF50",display:"inline-block",animation:"pulse 2s ease infinite" }} />
@@ -277,12 +290,10 @@ export default function App() {
           <CountdownTimer />
         </div>
 
-        {/* Grid */}
         <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(min(100%,310px),1fr))",gap:"clamp(14px,2vw,22px)",marginBottom:"64px" }}>
           {categories.map((cat,i) => <CategoryCard key={cat.id} cat={cat} index={i} />)}
         </div>
 
-        {/* Footer */}
         <div style={{ textAlign:"center",borderTop:"1px solid rgba(255,255,255,0.06)",paddingTop:"32px",fontFamily:"'Courier New',monospace",fontSize:"0.6rem",color:"rgba(255,255,255,0.18)",letterSpacing:"0.12em" }}>
           NEW PUZZLES DROP AT MIDNIGHT · STREAKS RESET DAILY · NO CHEATING (Morgan is watching 👀)
         </div>

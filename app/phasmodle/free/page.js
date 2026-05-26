@@ -1,4 +1,11 @@
-﻿"use client";
+﻿
+"use client";
+
+import { supabase } from "../../../lib/supabase";
+import { recordGameResult } from "../../../lib/auth";
+
+
+
 import { useState, useEffect, useCallback } from "react";
 
 const GHOSTS = [
@@ -270,6 +277,7 @@ export default function App() {
     setGuesses(next);
     if (ghost.name === answer.name) {
       setState("won"); setStreak(s=>s+1); setWins(w=>w+1); setPlayed(p=>p+1);
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"phasmodle-free",won:true}); });
       setTimeout(()=>setShowResult(true), 800);
     } else if (next.length >= MAX) {
       setState("lost"); setStreak(0); setPlayed(p=>p+1);

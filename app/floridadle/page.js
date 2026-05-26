@@ -1,5 +1,9 @@
 "use client";
 
+import { supabase } from "../../lib/supabase";
+import { recordGameResult } from "../../lib/auth";
+
+
 import { useState, useEffect } from "react";
 
 // ============================================================
@@ -333,12 +337,14 @@ export default function App() {
     setGuesses(next); setInput("");
     if (ok) {
       setState("won");
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"floridadle",won:true}); });
       setRevealed(PUZZLE.clues.length); setRevImgs(2);
       setTimeout(() => setShowPaper(true), 600);
     } else {
       setShaking(true); setTimeout(()=>setShaking(false),500);
       if (next.length >= MAX) {
         setState("lost");
+        supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"floridadle",won:false}); });
         setRevealed(PUZZLE.clues.length); setRevImgs(2);
         setTimeout(() => setShowPaper(true), 600);
       } else {

@@ -1,4 +1,11 @@
 "use client";
+
+
+import { supabase } from "../../../lib/supabase";
+import { recordGameResult } from "../../../lib/auth";
+
+
+
 import { useState, useEffect, useCallback } from "react";
 
 const PUZZLES = [
@@ -227,6 +234,7 @@ export default function App() {
     setGuesses(next); setInput("");
     if (ok) {
       setState("won");
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"floridadle-free",won:true}); });
       setRevealed(puzzle.clues.length); setRevImgs(3);
       setStreak(s => s+1);
       setWins(w => w+1);

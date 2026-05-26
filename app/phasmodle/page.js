@@ -1,4 +1,11 @@
 ﻿"use client";
+
+
+import { supabase } from "../../lib/supabase";
+import { recordGameResult } from "../../lib/auth";
+
+
+
 import { useState, useEffect } from "react";
 
 // ============================================================
@@ -656,9 +663,11 @@ export default function App() {
     setGuesses(next);
     if (ghost.name === ANSWER.name) {
       setState("won");
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"phasmodle",won:true}); });
       setTimeout(()=>setShowResult(true), 800);
     } else if (next.length >= MAX) {
       setState("lost");
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"phasmodle",won:false}); });
       setTimeout(()=>setShowResult(true), 800);
     }
   };
