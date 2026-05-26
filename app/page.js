@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const categories = [
   {
-    id: "phasmophobia",
+    id: "Phasmodle",
     name: "Phasmodle",
     subtitle: "Guess the Ghost",
     image: "/images/hub/ghosts.jpeg",
