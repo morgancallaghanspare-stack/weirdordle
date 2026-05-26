@@ -284,7 +284,7 @@ export default function App() {
 
         {/* Footer */}
         <div style={{ textAlign:"center",borderTop:"1px solid rgba(255,255,255,0.06)",paddingTop:"32px",fontFamily:"'Courier New',monospace",fontSize:"0.6rem",color:"rgba(255,255,255,0.18)",letterSpacing:"0.12em" }}>
-          NEW PUZZLES DROP AT MIDNIGHT · STREAKS RESET DAILY · NO CHEATING (we're watching 👀)
+          NEW PUZZLES DROP AT MIDNIGHT · STREAKS RESET DAILY · NO CHEATING (Morgan is watching 👀)
         </div>
       </div>
     </div>
