@@ -2,7 +2,6 @@
 
 import { supabase } from "../../lib/supabase";
 import { recordGameResult } from "../../lib/auth";
-
 import { useState, useEffect } from "react";
 
 const PUZZLES = [
@@ -33,64 +32,65 @@ const PUZZLES = [
     image: "/images/hub/peter.png",
   },
   {
-  id: 3,
-  answers: ["BRIAN GRIFFIN", "BRIAN"],
-  clues: [
-    { label: "SHOW",         value: "Family Guy" },
-    { label: "ROLE",         value: "Main character" },
-    { label: "PERSONALITY",  value: "Pretentious, intellectual, aspiring writer, alcoholic" },
-    { label: "KNOWN FOR",    value: "Unfinished novel, martini in hand, thinks he's smarter than everyone" },
-    { label: "RELATIONSHIP", value: "Best friends with Stewie, lives with the Griffin family" },
-  ],
-  visualHint: "White dog, walks on two legs, usually holding a drink",
-  image: "/images/hub/Brian_Griffin.png",
-},
-{
-  id: 4,
-  answers: ["QUAGMIRE", "GLENN QUAGMIRE"],
-  clues: [
-    { label: "SHOW",         value: "Family Guy" },
-    { label: "ROLE",         value: "Supporting character" },
-    { label: "PERSONALITY",  value: "Hypersexual, cheerful, occasionally surprisingly deep" },
-    { label: "KNOWN FOR",    value: "'Giggity', airline pilot, extremely questionable behaviour" },
-    { label: "RELATIONSHIP", value: "Neighbour and friend of Peter Griffin" },
-  ],
-  visualHint: "Square jaw, tiny eyes, tropical shirt, always grinning",
-  image: null,
-},
-{
-  id: 5,
-  answers: ["MEG GRIFFIN", "MEG"],
-  clues: [
-    { label: "SHOW",         value: "Family Guy" },
-    { label: "ROLE",         value: "Main character" },
-    { label: "PERSONALITY",  value: "Insecure, desperate for approval, perpetually picked on" },
-    { label: "KNOWN FOR",    value: "Being the family punching bag, nobody remembering her name" },
-    { label: "RELATIONSHIP", value: "Eldest child of Peter and Lois Griffin" },
-  ],
-  visualHint: "Pink beanie hat, glasses, pink shirt",
-  image: null,
-},
-{
-  id: 6,
-  answers: ["LOIS GRIFFIN", "LOIS"],
-  clues: [
-    { label: "SHOW",         value: "Family Guy" },
-    { label: "ROLE",         value: "Main character" },
-    { label: "PERSONALITY",  value: "Patient, sensible, but with a wild past she rarely mentions" },
-    { label: "KNOWN FOR",    value: "Being the only sane adult in the house, piano lessons" },
-    { label: "RELATIONSHIP", value: "Wife of Peter, mother of Meg, Chris and Stewie" },
-  ],
-  visualHint: "Red hair, green shirt, pearl necklace",
-  image: null,
-},{
+    id: 3,
+    answers: ["BRIAN GRIFFIN", "BRIAN"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Main character" },
+      { label: "PERSONALITY",  value: "Pretentious, intellectual, aspiring writer, alcoholic" },
+      { label: "KNOWN FOR",    value: "Unfinished novel, martini in hand, thinks he's smarter than everyone" },
+      { label: "RELATIONSHIP", value: "Best friends with Stewie, lives with the Griffin family" },
+    ],
+    visualHint: "White dog, walks on two legs, usually holding a drink",
+    image: "/images/hub/Brian_Griffin.png",
+  },
+  {
+    id: 4,
+    answers: ["QUAGMIRE", "GLENN QUAGMIRE"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Supporting character" },
+      { label: "PERSONALITY",  value: "Hypersexual, cheerful, occasionally surprisingly deep" },
+      { label: "KNOWN FOR",    value: "'Giggity', airline pilot, extremely questionable behaviour" },
+      { label: "RELATIONSHIP", value: "Neighbour and friend of Peter Griffin" },
+    ],
+    visualHint: "Square jaw, tiny eyes, tropical shirt, always grinning",
+    image: null,
+  },
+  {
+    id: 5,
+    answers: ["MEG GRIFFIN", "MEG"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Main character" },
+      { label: "PERSONALITY",  value: "Insecure, desperate for approval, perpetually picked on" },
+      { label: "KNOWN FOR",    value: "Being the family punching bag, nobody remembering her name" },
+      { label: "RELATIONSHIP", value: "Eldest child of Peter and Lois Griffin" },
+    ],
+    visualHint: "Pink beanie hat, glasses, pink shirt",
+    image: null,
+  },
+  {
+    id: 6,
+    answers: ["LOIS GRIFFIN", "LOIS"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Main character" },
+      { label: "PERSONALITY",  value: "Patient, sensible, but with a wild past she rarely mentions" },
+      { label: "KNOWN FOR",    value: "Being the only sane adult in the house, piano lessons" },
+      { label: "RELATIONSHIP", value: "Wife of Peter, mother of Meg, Chris and Stewie" },
+    ],
+    visualHint: "Red hair, green shirt, pearl necklace",
+    image: null,
+  },
+  {
     id: 7,
     answers: ["CHRIS GRIFFIN","CHRIS"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
       { label: "ROLE",         value: "Main character" },
       { label: "PERSONALITY",  value: "Idiotic, Stupid, impulsive, chronically into female attention" },
-      { label: "KNOWN FOR",    value: "Has a special relationship with Herbert'" },
+      { label: "KNOWN FOR",    value: "Has a special relationship with Herbert" },
       { label: "RELATIONSHIP", value: "Main family member" },
     ],
     visualHint: "Fat, blue t-shirt, black trousers, hat",
@@ -102,7 +102,7 @@ const PUZZLES = [
     clues: [
       { label: "SHOW",         value: "Family Guy" },
       { label: "ROLE",         value: "Side Character" },
-      { label: "PERSONALITY",  value: "macho, father, very employed" },
+      { label: "PERSONALITY",  value: "Macho, father, very employed" },
       { label: "KNOWN FOR",    value: "Demonstrating Justice" },
       { label: "RELATIONSHIP", value: "Best pal of Peter" },
     ],
@@ -115,8 +115,8 @@ const PUZZLES = [
     clues: [
       { label: "SHOW",         value: "Family Guy" },
       { label: "ROLE",         value: "Not a main character" },
-      { label: "PERSONALITY",  value: "repressed, disloyal, mother" },
-      { label: "KNOWN FOR",    value: "her husband" },
+      { label: "PERSONALITY",  value: "Repressed, disloyal, mother" },
+      { label: "KNOWN FOR",    value: "Her husband" },
       { label: "RELATIONSHIP", value: "Close friend of Lois Griffin" },
     ],
     visualHint: "Purple Dress, Purple Shoes, Black Hair",
@@ -128,7 +128,7 @@ const PUZZLES = [
     clues: [
       { label: "SHOW",         value: "Family Guy" },
       { label: "ROLE",         value: "Not a main character" },
-      { label: "PERSONALITY",  value: "Idiotic, bathtub victim " },
+      { label: "PERSONALITY",  value: "Idiotic, bathtub victim" },
       { label: "KNOWN FOR",    value: "His own show" },
       { label: "RELATIONSHIP", value: "Part of Peters gang" },
     ],
@@ -142,7 +142,7 @@ const PUZZLES = [
       { label: "SHOW",         value: "Family Guy" },
       { label: "ROLE",         value: "Side Character" },
       { label: "PERSONALITY",  value: "Weird, Old" },
-      { label: "KNOWN FOR",    value: "Love for children & Chris" },
+      { label: "KNOWN FOR",    value: "Love for children and Chris" },
       { label: "RELATIONSHIP", value: "The town pedophile" },
     ],
     visualHint: "Balding, Long nose, Blue robe, Walking Frame",
@@ -180,13 +180,13 @@ const PUZZLES = [
     clues: [
       { label: "SHOW",         value: "Family Guy" },
       { label: "ROLE",         value: "Not a main character" },
-      { label: "PERSONALITY",  value: "Rich, Obnoxious " },
+      { label: "PERSONALITY",  value: "Rich, Obnoxious" },
       { label: "KNOWN FOR",    value: "His money" },
       { label: "RELATIONSHIP", value: "Father of a main character" },
     ],
     visualHint: "Suited, Gray hair, Moustache",
     image: null,
-   }  
+  },
 ];
 
 function getDailyPuzzle() {
@@ -210,156 +210,55 @@ function Timer() {
       const now = new Date(), mid = new Date();
       mid.setHours(24,0,0,0);
       const d = mid - now;
-      setT(`${String(Math.floor(d/3600000)).padStart(2,"0")}:${String(Math.floor((d%3600000)/60000)).padStart(2,"0")}:${String(Math.floor((d%60000)/1000)).padStart(2,"0")}`);
+      setT(`${String(Math.floor(d/3600000)).padStart(2,"00")}:${String(Math.floor((d%3600000)/60000)).padStart(2,"00")}:${String(Math.floor((d%60000)/1000)).padStart(2,"00")}`);
     };
     tick(); const id = setInterval(tick,1000); return ()=>clearInterval(id);
   },[]);
   return <span style={{fontFamily:"'Courier New',monospace",fontSize:"1rem",color:YELLOW,fontWeight:"bold"}}>{t}</span>;
 }
 
-// Retro TV frame around the character image
 function TVFrame({ puzzle, guessCount, gameState }) {
   const isVisualUnlocked = guessCount >= 5 || gameState !== "playing";
-  const blur = isVisualUnlocked ? 0 : 999;
 
   return (
-    <div style={{
-      position:"relative",
-      width:"100%",
-      maxWidth:"340px",
-      margin:"0 auto",
-      flexShrink:0,
-    }}>
-      {/* TV outer shell */}
-      <div style={{
-        background:"linear-gradient(145deg,#e8e0d0,#c8bfaa)",
-        borderRadius:"28px",
-        padding:"14px 14px 44px",
-        boxShadow:"0 8px 32px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.4), 0 0 0 3px #a89880",
-        position:"relative",
-      }}>
-        {/* TV brand badge */}
-        <div style={{
-          position:"absolute",top:"8px",left:"50%",transform:"translateX(-50%)",
-          fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"0.7rem",
-          color:"#888",letterSpacing:"0.2em",
-        }}>QUAHOG-VISION</div>
-
-        {/* Screen bezel */}
-        <div style={{
-          background:"#111",
-          borderRadius:"16px",
-          padding:"6px",
-          boxShadow:"inset 0 4px 16px rgba(0,0,0,0.8), 0 0 0 2px #555",
-          marginTop:"16px",
-        }}>
-          {/* Screen content */}
-          <div style={{
-            borderRadius:"12px",
-            overflow:"hidden",
-            aspectRatio:"4/3",
-            background: isVisualUnlocked
-              ? `linear-gradient(135deg,${BLUE}33,#001525)`
-              : "#0a0a1a",
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center",
-            position:"relative",
-          }}>
-            {/* Scanline overlay for retro effect */}
-            <div style={{
-              position:"absolute",inset:0,zIndex:2,
-              backgroundImage:"repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px)",
-              pointerEvents:"none",borderRadius:"12px",
-            }}/>
-
+    <div style={{position:"relative",width:"100%",maxWidth:"340px",margin:"0 auto",flexShrink:0}}>
+      <div style={{background:"linear-gradient(145deg,#e8e0d0,#c8bfaa)",borderRadius:"28px",padding:"14px 14px 44px",boxShadow:"0 8px 32px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.4), 0 0 0 3px #a89880",position:"relative"}}>
+        <div style={{position:"absolute",top:"8px",left:"50%",transform:"translateX(-50%)",fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"0.7rem",color:"#888",letterSpacing:"0.2em"}}>QUAHOG-VISION</div>
+        <div style={{background:"#111",borderRadius:"16px",padding:"6px",boxShadow:"inset 0 4px 16px rgba(0,0,0,0.8), 0 0 0 2px #555",marginTop:"16px"}}>
+          <div style={{borderRadius:"12px",overflow:"hidden",aspectRatio:"4/3",maxHeight:"200px",background:isVisualUnlocked?`linear-gradient(135deg,${BLUE}33,#001525)`:"#0a0a1a",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
+            <div style={{position:"absolute",inset:0,zIndex:2,backgroundImage:"repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px)",pointerEvents:"none",borderRadius:"12px"}}/>
             {puzzle.image && isVisualUnlocked ? (
-              <img src={puzzle.image} alt="?" style={{width:"100%",height:"100%",objectFit:"cover",filter:`blur(${blur}px)`,transition:"filter 1s ease"}}/>
+              <img src={puzzle.image} alt="?" style={{width:"100%",height:"100%",objectFit:"contain",transition:"filter 1s ease"}}/>
             ) : isVisualUnlocked ? (
               <div style={{textAlign:"center",zIndex:1,padding:"12px"}}>
-                <div style={{fontSize:"3.5rem",marginBottom:"8px",filter:"drop-shadow(0 0 20px rgba(255,214,0,0.6))"}}>
-                  {guessCount === 0 ? "?" : "👤"}
-                </div>
-                <div style={{
-                  fontFamily:"'Courier New',monospace",fontSize:"0.55rem",
-                  color:"rgba(255,255,255,0.3)",border:"1px dashed rgba(255,255,255,0.15)",
-                  padding:"3px 8px",borderRadius:"4px",
-                }}>ADD IMAGE</div>
+                <div style={{fontSize:"3.5rem",marginBottom:"8px"}}>👤</div>
+                <div style={{fontFamily:"'Courier New',monospace",fontSize:"0.55rem",color:"rgba(255,255,255,0.3)",border:"1px dashed rgba(255,255,255,0.15)",padding:"3px 8px",borderRadius:"4px"}}>ADD IMAGE</div>
               </div>
             ) : (
-              // Static / locked screen
               <div style={{textAlign:"center",zIndex:1,padding:"16px"}}>
-                <div style={{
-                  fontFamily:"'Bebas Neue',Impact,sans-serif",
-                  fontSize:"clamp(1.2rem,3vw,1.8rem)",
-                  color:"rgba(255,255,255,0.15)",
-                  letterSpacing:"0.1em",
-                  lineHeight:1.2,
-                  marginBottom:"8px",
-                }}>
-                  WHO IS IT?
-                </div>
-                {/* Static noise dots */}
-                <div style={{
-                  display:"grid",gridTemplateColumns:"repeat(8,1fr)",
-                  gap:"3px",opacity:0.3,
-                }}>
+                <div style={{fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"clamp(1.2rem,3vw,1.8rem)",color:"rgba(255,255,255,0.15)",letterSpacing:"0.1em",lineHeight:1.2,marginBottom:"8px"}}>WHO IS IT?</div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(8,1fr)",gap:"3px",opacity:0.3}}>
                   {Array.from({length:32}).map((_,i)=>(
-                    <div key={i} style={{
-                      width:"100%",aspectRatio:"1",
-                      borderRadius:"50%",
-                      background:`rgba(255,255,255,${i*0.037+0.1}*0.8)`,
-                    }}/>
+                    <div key={i} style={{width:"100%",aspectRatio:"1",borderRadius:"50%",background:`rgba(255,255,255,${(i*0.037+0.1)%0.8})`}}/>
                   ))}
                 </div>
-                <div style={{
-                  marginTop:"10px",
-                  fontFamily:"'Courier New',monospace",
-                  fontSize:"0.6rem",
-                  color:"rgba(255,255,255,0.2)",
-                  letterSpacing:"0.1em",
-                }}>
+                <div style={{marginTop:"10px",fontFamily:"'Courier New',monospace",fontSize:"0.6rem",color:"rgba(255,255,255,0.2)",letterSpacing:"0.1em"}}>
                   {5-Math.min(guessCount,4)} GUESS{5-Math.min(guessCount,4)===1?"":"ES"} TO UNLOCK
                 </div>
               </div>
             )}
-
-            {/* Visual hint banner at bottom of screen */}
-            {isVisualUnlocked && gameState === "playing" && (
-              <div style={{
-                position:"absolute",bottom:0,left:0,right:0,zIndex:3,
-                background:"rgba(0,0,0,0.85)",
-                padding:"6px 10px",
-                fontFamily:"'Nunito',Arial,sans-serif",
-                fontSize:"0.65rem",fontWeight:800,
-                color:YELLOW,
-                textAlign:"center",
-                animation:"fadeIn 0.5s ease",
-              }}>
+            {isVisualUnlocked && gameState==="playing" && (
+              <div style={{position:"absolute",bottom:0,left:0,right:0,zIndex:3,background:"rgba(0,0,0,0.85)",padding:"6px 10px",fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.65rem",fontWeight:800,color:YELLOW,textAlign:"center",animation:"fadeIn 0.5s ease"}}>
                 🎨 {puzzle.visualHint}
               </div>
             )}
           </div>
         </div>
-
-        {/* TV controls row */}
-        <div style={{
-          position:"absolute",bottom:"10px",left:"50%",transform:"translateX(-50%)",
-          display:"flex",alignItems:"center",gap:"10px",
-        }}>
-          {/* Channel knob */}
+        <div style={{position:"absolute",bottom:"10px",left:"50%",transform:"translateX(-50%)",display:"flex",alignItems:"center",gap:"10px"}}>
           <div style={{width:"20px",height:"20px",borderRadius:"50%",background:"linear-gradient(135deg,#888,#555)",boxShadow:"0 2px 4px rgba(0,0,0,0.4)"}}/>
-          {/* Speaker grille */}
-          <div style={{display:"flex",gap:"2px"}}>
-            {Array.from({length:6}).map((_,i)=>(
-              <div key={i} style={{width:"2px",height:"12px",background:"#888",borderRadius:"1px"}}/>
-            ))}
-          </div>
-          {/* Power button */}
+          <div style={{display:"flex",gap:"2px"}}>{Array.from({length:6}).map((_,i)=>(<div key={i} style={{width:"2px",height:"12px",background:"#888",borderRadius:"1px"}}/>))}</div>
           <div style={{width:"14px",height:"14px",borderRadius:"50%",background:"#c0392b",boxShadow:"0 0 6px rgba(192,57,43,0.5)"}}/>
         </div>
-
-        {/* TV legs */}
         <div style={{position:"absolute",bottom:"-14px",left:"20%",width:"12%",height:"14px",background:"linear-gradient(180deg,#c8bfaa,#a89880)",borderRadius:"0 0 4px 4px"}}/>
         <div style={{position:"absolute",bottom:"-14px",right:"20%",width:"12%",height:"14px",background:"linear-gradient(180deg,#c8bfaa,#a89880)",borderRadius:"0 0 4px 4px"}}/>
       </div>
@@ -388,13 +287,20 @@ export default function App() {
     const ok = PUZZLE.answers.some(a => a.toUpperCase() === v);
     const next = [...guesses, {text:v, ok}];
     setGuesses(next); setInput("");
-    if (ok) { setState("won"); setRevealed(PUZZLE.clues.length); }
-    supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"griffindle",won:true}); });
-    else {
+
+    if (ok) {
+      setState("won");
+      setRevealed(PUZZLE.clues.length);
+      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"griffindle",won:true}); });
+    } else {
       setShaking(true); setTimeout(()=>setShaking(false),500);
-      if (next.length >= MAX) { setState("lost"); setRevealed(PUZZLE.clues.length); }
-      supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"griffindle",won:false}); });
-      else setTimeout(()=>revealNext(revealed), 500);
+      if (next.length >= MAX) {
+        setState("lost");
+        setRevealed(PUZZLE.clues.length);
+        supabase.auth.getUser().then(({data:{user}})=>{ if(user) recordGameResult({userId:user.id,category:"griffindle",won:false}); });
+      } else {
+        setTimeout(()=>revealNext(revealed), 500);
+      }
     }
   };
 
@@ -408,13 +314,7 @@ export default function App() {
   const isVisualUnlocked = guesses.length >= 5 || state !== "playing";
 
   return (
-    <div style={{
-      minHeight:"100vh", width:"100vw",
-      background:"#FFF9F0",
-      fontFamily:"'Nunito',Arial,sans-serif",
-      display:"flex", flexDirection:"column",
-      overflow:"hidden",
-    }}>
+    <div style={{minHeight:"100vh",width:"100vw",background:"#FFF9F0",fontFamily:"'Nunito',Arial,sans-serif",display:"flex",flexDirection:"column",overflow:"hidden"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@700;800;900&display=swap');
         html{font-size:18px;}
@@ -430,15 +330,8 @@ export default function App() {
         button:active{transform:scale(0.97);}
       `}</style>
 
-      {/* ── TOP NAV ── */}
-      <div style={{
-        background:BLUE,
-        padding:"10px 20px",
-        display:"flex", alignItems:"center", justifyContent:"space-between",
-        boxShadow:"0 3px 0px #0d47a1",
-        flexShrink:0,
-        position:"relative", zIndex:10,
-      }}>
+      {/* NAV */}
+      <div style={{background:BLUE,padding:"10px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:"0 3px 0px #0d47a1",flexShrink:0,position:"relative",zIndex:10}}>
         <a href="/" style={{fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"1.3rem",letterSpacing:"0.06em",color:"rgba(255,255,255,0.6)",cursor:"pointer",textDecoration:"none"}}>← WEIRDORDLE</a>
         <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
           <span style={{fontSize:"1.3rem",animation:"wiggle 2s ease infinite"}}>🍺</span>
@@ -451,24 +344,11 @@ export default function App() {
         </div>
       </div>
 
-      {/* ── ATTEMPT DOTS ── */}
-      <div style={{
-        background:"#EEF2FF",
-        padding:"8px 20px",
-        display:"flex", alignItems:"center", justifyContent:"space-between",
-        borderBottom:"2px solid #dde3ff",
-        flexShrink:0,
-      }}>
+      {/* ATTEMPT DOTS */}
+      <div style={{background:"#EEF2FF",padding:"8px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",borderBottom:"2px solid #dde3ff",flexShrink:0}}>
         <div style={{display:"flex",gap:"8px",alignItems:"center"}}>
           {Array.from({length:MAX}).map((_,i)=>(
-            <div key={i} style={{
-              width:"22px",height:"22px",borderRadius:"50%",
-              border:`2px solid ${i<guesses.length?(guesses[i].ok?GREEN:RED):i===guesses.length&&state==="playing"?BLUE:"#ccc"}`,
-              background:i<guesses.length?(guesses[i].ok?GREEN:RED):i===guesses.length&&state==="playing"?`${BLUE}22`:"transparent",
-              transition:"all 0.3s",
-              display:"flex",alignItems:"center",justifyContent:"center",
-              fontSize:"0.6rem",
-            }}>
+            <div key={i} style={{width:"22px",height:"22px",borderRadius:"50%",border:`2px solid ${i<guesses.length?(guesses[i].ok?GREEN:RED):i===guesses.length&&state==="playing"?BLUE:"#ccc"}`,background:i<guesses.length?(guesses[i].ok?GREEN:RED):i===guesses.length&&state==="playing"?`${BLUE}22`:"transparent",transition:"all 0.3s",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"0.6rem"}}>
               {i<guesses.length&&(guesses[i].ok?"✓":"✗")}
             </div>
           ))}
@@ -478,26 +358,13 @@ export default function App() {
         </span>
       </div>
 
-      {/* ── MAIN CONTENT ── */}
-      <div style={{
-        flex:1, display:"grid",
-        gridTemplateColumns:"360px 1fr",
-        gap:"20px",
-        padding:"20px",
-        minHeight:0, overflow:"hidden",
-      }}>
+      {/* MAIN */}
+      <div style={{flex:1,display:"grid",gridTemplateColumns:"360px 1fr",gap:"20px",padding:"20px",minHeight:0,overflow:"hidden"}}>
 
-        {/* LEFT — TV + stats */}
+        {/* LEFT */}
         <div style={{display:"flex",flexDirection:"column",gap:"16px",alignItems:"center",minHeight:0}}>
-          <TVFrame puzzle={PUZZLE} guessCount={guesses.length} gameState={state} />
-
-          {/* Stats card */}
-          <div style={{
-            width:"100%",background:WHITE,borderRadius:"16px",
-            padding:"14px 16px",
-            border:"2px solid #EEF2FF",
-            boxShadow:"0 2px 12px rgba(21,101,192,0.08)",
-          }}>
+          <TVFrame puzzle={PUZZLE} guessCount={guesses.length} gameState={state}/>
+          <div style={{width:"100%",background:WHITE,borderRadius:"16px",padding:"14px 16px",border:"2px solid #EEF2FF",boxShadow:"0 2px 12px rgba(21,101,192,0.08)"}}>
             <div style={{fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.6rem",fontWeight:900,letterSpacing:"0.14em",color:"#aaa",marginBottom:"10px",textTransform:"uppercase"}}>Your Stats</div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"6px",textAlign:"center"}}>
               {[["1","PLAYED"],["100%","WIN %"],["1","STREAK"],["1","BEST"]].map(([v,l])=>(
@@ -508,53 +375,22 @@ export default function App() {
               ))}
             </div>
           </div>
-
-          {/* Next puzzle timer */}
-          <div style={{
-            width:"100%",background:BLUE,borderRadius:"14px",
-            padding:"10px 16px",textAlign:"center",
-            boxShadow:"0 4px 0px #0d47a1",
-          }}>
+          <div style={{width:"100%",background:BLUE,borderRadius:"14px",padding:"10px 16px",textAlign:"center",boxShadow:"0 4px 0px #0d47a1"}}>
             <div style={{fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.55rem",fontWeight:800,color:"rgba(255,255,255,0.5)",letterSpacing:"0.14em",marginBottom:"3px",textTransform:"uppercase"}}>Next Griffindle In</div>
             <Timer/>
           </div>
         </div>
 
-        {/* RIGHT — clues + guesses */}
+        {/* RIGHT */}
         <div style={{display:"flex",flexDirection:"column",gap:"12px",minHeight:0,overflow:"hidden"}}>
-
-          {/* Clue cards */}
-          <div style={{
-            flex:1,background:WHITE,borderRadius:"16px",
-            padding:"16px",border:"2px solid #EEF2FF",
-            boxShadow:"0 2px 12px rgba(21,101,192,0.06)",
-            display:"flex",flexDirection:"column",gap:"8px",
-            overflow:"auto",minHeight:0,
-          }}>
+          <div style={{flex:1,background:WHITE,borderRadius:"16px",padding:"16px",border:"2px solid #EEF2FF",boxShadow:"0 2px 12px rgba(21,101,192,0.06)",display:"flex",flexDirection:"column",gap:"8px",overflow:"auto",minHeight:0}}>
             <div style={{fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.6rem",fontWeight:900,letterSpacing:"0.14em",color:"#aaa",flexShrink:0,textTransform:"uppercase"}}>Character File</div>
 
             {PUZZLE.clues.map((clue,i)=>{
               const rev = i < revealed;
               return (
-                <div key={i} style={{
-                  display:"flex",gap:"10px",alignItems:"flex-start",
-                  padding:"10px 12px",borderRadius:"12px",flexShrink:0,
-                  background:rev?`${BLUE}0f`:"#f8f9ff",
-                  border:`2px solid ${rev?BLUE+"33":"#EEF2FF"}`,
-                  opacity:rev?1:0.4,
-                  transition:"all 0.4s ease",
-                  animation:i===newClue&&rev?"clueIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both":"none",
-                }}>
-                  <div style={{
-                    width:"26px",height:"26px",borderRadius:"8px",
-                    background:rev?BLUE:"#dde3ff",
-                    display:"flex",alignItems:"center",justifyContent:"center",
-                    flexShrink:0,fontFamily:"'Nunito',Arial,sans-serif",
-                    fontSize:"0.7rem",fontWeight:900,
-                    color:rev?WHITE:"#aab",
-                    transition:"all 0.4s",
-                    boxShadow:rev?"0 2px 8px rgba(21,101,192,0.3)":"none",
-                  }}>{i+1}</div>
+                <div key={i} style={{display:"flex",gap:"10px",alignItems:"flex-start",padding:"10px 12px",borderRadius:"12px",flexShrink:0,background:rev?`${BLUE}0f`:"#f8f9ff",border:`2px solid ${rev?BLUE+"33":"#EEF2FF"}`,opacity:rev?1:0.4,transition:"all 0.4s ease",animation:i===newClue&&rev?"clueIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both":"none"}}>
+                  <div style={{width:"26px",height:"26px",borderRadius:"8px",background:rev?BLUE:"#dde3ff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.7rem",fontWeight:900,color:rev?WHITE:"#aab",transition:"all 0.4s",boxShadow:rev?"0 2px 8px rgba(21,101,192,0.3)":"none"}}>{i+1}</div>
                   <div style={{flex:1,minWidth:0}}>
                     <div style={{fontSize:"0.55rem",fontWeight:900,letterSpacing:"0.14em",color:rev?BLUE:"#bbb",marginBottom:"2px",textTransform:"uppercase"}}>{clue.label}</div>
                     <div style={{fontSize:"0.85rem",fontWeight:700,color:rev?"#222":"#ddd",lineHeight:1.35,wordBreak:"break-word"}}>{rev?clue.value:"Hidden"}</div>
@@ -563,17 +399,7 @@ export default function App() {
               );
             })}
 
-            {/* Visual hint clue card */}
-            <div style={{
-              display:"flex",gap:"10px",alignItems:"flex-start",
-              padding:"10px 12px",borderRadius:"12px",flexShrink:0,
-              background:isVisualUnlocked?"#FFF9E6":"#f8f9ff",
-              border:`2px solid ${isVisualUnlocked?YELLOW:"#EEF2FF"}`,
-              opacity:isVisualUnlocked?1:0.4,
-              transition:"all 0.5s ease",
-              animation:guesses.length===5?"clueIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both":"none",
-              boxShadow:isVisualUnlocked?"0 2px 12px rgba(255,214,0,0.2)":"none",
-            }}>
+            <div style={{display:"flex",gap:"10px",alignItems:"flex-start",padding:"10px 12px",borderRadius:"12px",flexShrink:0,background:isVisualUnlocked?"#FFF9E6":"#f8f9ff",border:`2px solid ${isVisualUnlocked?YELLOW:"#EEF2FF"}`,opacity:isVisualUnlocked?1:0.4,transition:"all 0.5s ease",animation:guesses.length===5?"clueIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both":"none",boxShadow:isVisualUnlocked?"0 2px 12px rgba(255,214,0,0.2)":"none"}}>
               <div style={{width:"26px",height:"26px",borderRadius:"8px",background:isVisualUnlocked?YELLOW:"#dde3ff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:"0.9rem",boxShadow:isVisualUnlocked?"0 2px 8px rgba(255,214,0,0.4)":"none"}}>🎨</div>
               <div style={{flex:1}}>
                 <div style={{fontSize:"0.55rem",fontWeight:900,letterSpacing:"0.14em",color:isVisualUnlocked?"#b8860b":"#bbb",marginBottom:"2px",textTransform:"uppercase"}}>Visual Hint</div>
@@ -581,7 +407,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Locked indicator */}
             {state==="playing"&&revealed<PUZZLE.clues.length&&(
               <div style={{padding:"8px 12px",borderRadius:"10px",border:"2px dashed #dde3ff",textAlign:"center",flexShrink:0,fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.65rem",fontWeight:800,color:"#bbb"}}>
                 🔒 {PUZZLE.clues.length-revealed} clue{PUZZLE.clues.length-revealed===1?"":"s"} locked — keep guessing!
@@ -589,26 +414,13 @@ export default function App() {
             )}
           </div>
 
-          {/* Guesses */}
-          <div style={{
-            background:WHITE,borderRadius:"16px",
-            padding:"14px 16px",border:"2px solid #EEF2FF",
-            boxShadow:"0 2px 12px rgba(21,101,192,0.06)",
-            flexShrink:0,
-          }}>
+          <div style={{background:WHITE,borderRadius:"16px",padding:"14px 16px",border:"2px solid #EEF2FF",boxShadow:"0 2px 12px rgba(21,101,192,0.06)",flexShrink:0}}>
             <div style={{fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.6rem",fontWeight:900,letterSpacing:"0.14em",color:"#aaa",marginBottom:"8px",textTransform:"uppercase"}}>Guesses</div>
             <div style={{display:"flex",flexWrap:"wrap",gap:"6px",minHeight:"24px"}}>
               {guesses.length===0
                 ? <span style={{fontSize:"0.75rem",fontWeight:700,color:"#ccc"}}>No guesses yet — who do you think it is?</span>
                 : guesses.map((g,i)=>(
-                  <div key={i} style={{
-                    display:"flex",alignItems:"center",gap:"5px",
-                    padding:"4px 12px",borderRadius:"20px",
-                    background:g.ok?"#E8F5E9":"#FFEBEE",
-                    border:`2px solid ${g.ok?"#A5D6A7":"#FFCDD2"}`,
-                    animation:"fadeIn 0.3s ease",
-                    boxShadow:g.ok?"0 2px 8px rgba(67,160,71,0.2)":"none",
-                  }}>
+                  <div key={i} style={{display:"flex",alignItems:"center",gap:"5px",padding:"4px 12px",borderRadius:"20px",background:g.ok?"#E8F5E9":"#FFEBEE",border:`2px solid ${g.ok?"#A5D6A7":"#FFCDD2"}`,animation:"fadeIn 0.3s ease",boxShadow:g.ok?"0 2px 8px rgba(67,160,71,0.2)":"none"}}>
                     <span style={{fontSize:"0.75rem"}}>{g.ok?"✅":"❌"}</span>
                     <span style={{fontSize:"0.75rem",fontWeight:800,color:g.ok?GREEN:RED,textTransform:"uppercase",letterSpacing:"0.04em"}}>{g.text}</span>
                   </div>
@@ -619,43 +431,17 @@ export default function App() {
         </div>
       </div>
 
-      {/* ── FIXED BOTTOM INPUT ── */}
-      <div style={{
-        position:"fixed",bottom:0,left:0,right:0,zIndex:50,
-        padding:"10px 20px 14px",
-        background:"linear-gradient(transparent,#FFF9F0 25%)",
-      }}>
+      {/* FIXED BOTTOM INPUT */}
+      <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:50,padding:"10px 20px 14px",background:"linear-gradient(transparent,#FFF9F0 25%)"}}>
         {state==="playing" ? (
           <div style={{display:"flex",gap:"8px",animation:shaking?"shake 0.5s ease":"none",maxWidth:"100%"}}>
-            <input
-              value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&guess()}
+            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&guess()}
               placeholder="Type the character's name..."
-              style={{
-                flex:1,padding:"12px 18px",borderRadius:"14px",
-                border:`2px solid ${BLUE}`,background:WHITE,
-                color:"#111",fontFamily:"'Nunito',Arial,sans-serif",
-                fontSize:"0.9rem",fontWeight:700,
-                boxShadow:"0 2px 12px rgba(21,101,192,0.12)",
-              }}
-            />
-            <button onClick={guess} style={{
-              padding:"12px 24px",borderRadius:"14px",border:"none",
-              background:BLUE,color:WHITE,
-              fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.8rem",fontWeight:900,
-              letterSpacing:"0.06em",cursor:"pointer",
-              boxShadow:"0 4px 0px #0d47a1",
-              whiteSpace:"nowrap",
-            }}>GUESS</button>
+              style={{flex:1,padding:"12px 18px",borderRadius:"14px",border:`2px solid ${BLUE}`,background:WHITE,color:"#111",fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.9rem",fontWeight:700,boxShadow:"0 2px 12px rgba(21,101,192,0.12)"}}/>
+            <button onClick={guess} style={{padding:"12px 24px",borderRadius:"14px",border:"none",background:BLUE,color:WHITE,fontFamily:"'Nunito',Arial,sans-serif",fontSize:"0.8rem",fontWeight:900,letterSpacing:"0.06em",cursor:"pointer",boxShadow:"0 4px 0px #0d47a1",whiteSpace:"nowrap"}}>GUESS</button>
           </div>
         ) : (
-          <div style={{
-            background:state==="won"?"#E8F5E9":"#FFEBEE",
-            border:`2px solid ${state==="won"?"#A5D6A7":"#FFCDD2"}`,
-            borderRadius:"16px",padding:"12px 18px",
-            display:"flex",alignItems:"center",justifyContent:"space-between",gap:"12px",
-            animation:"popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both",
-            boxShadow:`0 4px 20px ${state==="won"?"rgba(67,160,71,0.2)":"rgba(229,57,53,0.15)"}`,
-          }}>
+          <div style={{background:state==="won"?"#E8F5E9":"#FFEBEE",border:`2px solid ${state==="won"?"#A5D6A7":"#FFCDD2"}`,borderRadius:"16px",padding:"12px 18px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"12px",animation:"popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both",boxShadow:`0 4px 20px ${state==="won"?"rgba(67,160,71,0.2)":"rgba(229,57,53,0.15)"}`}}>
             <div>
               <div style={{fontFamily:"'Nunito',Arial,sans-serif",fontSize:"1rem",fontWeight:900,color:state==="won"?GREEN:RED}}>
                 {state==="won"?`🎉 Got it in ${guesses.length}!`:"💀 Game over"} — {PUZZLE.answers[0]}
@@ -669,7 +455,7 @@ export default function App() {
         )}
       </div>
 
-      {/* ── HOW TO PLAY MODAL ── */}
+      {/* HOW TO PLAY MODAL */}
       {showHelp && (
         <div onClick={()=>setShowHelp(false)} style={{position:"fixed",inset:0,zIndex:200,background:"rgba(0,0,0,0.5)",backdropFilter:"blur(6px)",display:"flex",alignItems:"center",justifyContent:"center",padding:"20px",animation:"fadeIn 0.2s ease"}}>
           <div onClick={e=>e.stopPropagation()} style={{background:WHITE,border:`3px solid ${BLUE}`,borderRadius:"22px",padding:"28px",maxWidth:"400px",width:"100%",position:"relative",boxShadow:"0 20px 60px rgba(21,101,192,0.25)"}}>
