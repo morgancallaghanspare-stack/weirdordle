@@ -4,13 +4,16 @@ import { supabase } from "../lib/supabase";
 import { signInWithGoogle, signOut, getOrCreateProfile, getLeaderboard, getUserStats } from "../lib/auth";
 
 const CATEGORIES = [
-  { id: "floridadle",  name: "Floridadle",     emoji: "🐊" },
-  { id: "griffindle",  name: "Griffindle",      emoji: "🍺" },
-  { id: "phasmodle",   name: "Phasmodle",       emoji: "👻" },
-  { id: "animatronidle", name: "Animatronidle", emoji: "🐻" },
-  { id: "operatle",    name: "Operatle",        emoji: "🎯" },
-  { id: "crimedle",    name: "Crimedle",        emoji: "🔪" },
-  { id: "dramadle",    name: "Dramadle",        emoji: "🎭" },
+  { id: "floridadle",      name: "Floridadle",       emoji: "🐊", free: false },
+  { id: "floridadle-free", name: "Floridadle ∞",     emoji: "🐊", free: true  },
+  { id: "griffindle",      name: "Griffindle",        emoji: "🍺", free: false },
+  { id: "griffindle-free", name: "Griffindle ∞",     emoji: "🍺", free: true  },
+  { id: "phasmodle",       name: "Phasmodle",         emoji: "👻", free: false },
+  { id: "phasmodle-free",  name: "Phasmodle ∞",      emoji: "👻", free: true  },
+  { id: "animatronidle",   name: "Animatronidle",     emoji: "🐻", free: false },
+  { id: "operatle",        name: "Operatle",          emoji: "🎯", free: false },
+  { id: "crimedle",        name: "Crimedle",          emoji: "🔪", free: false },
+  { id: "dramadle",        name: "Dramadle",          emoji: "🎭", free: false },
 ];
 
 export default function AuthModal({ onClose }) {
