@@ -20,7 +20,7 @@ const PUZZLES = [
     answers: ["PETER GRIFFIN","PETER"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
-      { label: "ROLE",         value: "Main character — the dad" },
+      { label: "ROLE",         value: "Main character" },
       { label: "PERSONALITY",  value: "Idiotic, loveable, impulsive, chronically unemployed" },
       { label: "KNOWN FOR",    value: "Constant feuds with the giant chicken, saying 'Ssss... ahhh'" },
       { label: "RELATIONSHIP", value: "Husband of Lois, father of Meg, Chris and Stewie" },
@@ -33,7 +33,7 @@ const PUZZLES = [
     answers: ["BRIAN GRIFFIN","BRIAN"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
-      { label: "ROLE",         value: "Main character — the family dog" },
+      { label: "ROLE",         value: "Main character" },
       { label: "PERSONALITY",  value: "Pretentious, intellectual, aspiring writer, alcoholic" },
       { label: "KNOWN FOR",    value: "Unfinished novel, martini in hand, thinks he's smarter than everyone" },
       { label: "RELATIONSHIP", value: "Best friends with Stewie, lives with the Griffin family" },
@@ -46,7 +46,7 @@ const PUZZLES = [
     answers: ["QUAGMIRE","GLENN QUAGMIRE"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
-      { label: "ROLE",         value: "Supporting character — Peter's neighbour" },
+      { label: "ROLE",         value: "Supporting character" },
       { label: "PERSONALITY",  value: "Hypersexual, cheerful, occasionally surprisingly deep" },
       { label: "KNOWN FOR",    value: "'Giggity', airline pilot, extremely questionable behaviour" },
       { label: "RELATIONSHIP", value: "Neighbour and friend of Peter Griffin" },
@@ -59,7 +59,7 @@ const PUZZLES = [
     answers: ["MEG GRIFFIN","MEG"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
-      { label: "ROLE",         value: "Main character — the eldest daughter" },
+      { label: "ROLE",         value: "Main character" },
       { label: "PERSONALITY",  value: "Insecure, desperate for approval, perpetually picked on" },
       { label: "KNOWN FOR",    value: "Being the family punching bag, nobody remembering her name" },
       { label: "RELATIONSHIP", value: "Eldest child of Peter and Lois Griffin" },
@@ -72,7 +72,7 @@ const PUZZLES = [
     answers: ["LOIS GRIFFIN","LOIS"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
-      { label: "ROLE",         value: "Main character — the mum" },
+      { label: "ROLE",         value: "Main character" },
       { label: "PERSONALITY",  value: "Patient, sensible, but with a wild past she rarely mentions" },
       { label: "KNOWN FOR",    value: "Being the only sane adult in the house, piano lessons" },
       { label: "RELATIONSHIP", value: "Wife of Peter, mother of Meg, Chris and Stewie" },
@@ -81,7 +81,7 @@ const PUZZLES = [
     image: null,
   },
   {
-    id: 2,
+    id: 7,
     answers: ["CHRIS GRIFFIN","CHRIS"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
@@ -94,7 +94,7 @@ const PUZZLES = [
     image: null,
   },
   {
-    id: 2,
+    id: 8,
     answers: ["JOE SWANSON","JOE"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
@@ -107,7 +107,7 @@ const PUZZLES = [
     image: null,
   },
   {
-    id: 2,
+    id: 9,
     answers: ["BONNIE SWANSON","BONNIE"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
@@ -120,7 +120,7 @@ const PUZZLES = [
     image: null,
   },
   {
-    id: 2,
+    id: 10,
     answers: ["CLEVELAND BROWN","CLEVELAND"],
     clues: [
       { label: "SHOW",         value: "Family Guy" },
@@ -132,6 +132,58 @@ const PUZZLES = [
     visualHint: "Moustache, Yellow Tee",
     image: null,
   },
+  {
+    id: 11,
+    answers: ["HERBERT THE PERVERT","HERBERT"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Side Character" },
+      { label: "PERSONALITY",  value: "Weird, Old" },
+      { label: "KNOWN FOR",    value: "Love for children & Chris" },
+      { label: "RELATIONSHIP", value: "The town pedophile" },
+    ],
+    visualHint: "Balding, Long nose, Blue robe, Walking Frame",
+    image: null,
+  },
+  {
+    id: 12,
+    answers: ["SUSIE SWANSON","SUSIE"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Side Character" },
+      { label: "PERSONALITY",  value: "Highly intelligent, Manly" },
+      { label: "KNOWN FOR",    value: "Demonstrating Justice" },
+      { label: "RELATIONSHIP", value: "Best pal of Peter" },
+    ],
+    visualHint: "Young, Pink Bow Tie, Green tank top",
+    image: null,
+  },
+  {
+    id: 13,
+    answers: ["ADAM WEST","MAYOR WEST"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Not a main character" },
+      { label: "PERSONALITY",  value: "Odd" },
+      { label: "KNOWN FOR",    value: "Being a great leader" },
+      { label: "RELATIONSHIP", value: "Related to the whole of Quahog" },
+    ],
+    visualHint: "Gray suit, Gray hair",
+    image: null,
+  },
+  {
+    id: 14,
+    answers: ["CARTER","CARTER PEWTERSCHMIDT"],
+    clues: [
+      { label: "SHOW",         value: "Family Guy" },
+      { label: "ROLE",         value: "Not a main character" },
+      { label: "PERSONALITY",  value: "Rich, Obnoxious " },
+      { label: "KNOWN FOR",    value: "His money" },
+      { label: "RELATIONSHIP", value: "Father of a main character" },
+    ],
+    visualHint: "Suited, Gray hair, Moustache",
+    image: null,
+ 
 ];
 
 function getRandomPuzzle(excludeId) {
