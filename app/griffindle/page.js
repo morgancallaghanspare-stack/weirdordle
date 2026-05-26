@@ -184,7 +184,7 @@ const PUZZLES = [
     ],
     visualHint: "Suited, Gray hair, Moustache",
     image: null,
-  {
+   }  
 ];
 
 function getDailyPuzzle() {
