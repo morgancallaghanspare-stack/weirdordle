@@ -670,7 +670,8 @@ export default function App() {
           <span style={{fontFamily:"'Bebas Neue',Impact,sans-serif",fontSize:"1.4rem",letterSpacing:"0.06em",color:"#4ade80",textShadow:"0 0 20px rgba(74,222,128,0.4)"}}>PHASMODLE</span>
         </div>
         <div style={{display:"flex",gap:"8px",alignItems:"center"}}>
-          <div style={{fontSize:"0.52rem",letterSpacing:"0.14em",color:"#0a150b",background:"#4ade80",padding:"3px 8px",borderRadius:"20px",fontWeight:"bold"}}>DAILY</div>
+          <a href={`/${cat.id}`} style={{ flex:1,padding:"10px 0",borderRadius:"8px",border:"none",background:cat.color,color:"#fff",fontFamily:"'Courier New',monospace",fontSize:"0.7rem",fontWeight:"bold",letterSpacing:"0.1em",cursor:"pointer",textDecoration:"none",display:"flex",alignItems:"center",justifyContent:"center" }}>📅 DAILY</a>
+<a href={`/${cat.id}/free`} style={{ flex:1,padding:"10px 0",borderRadius:"8px",border:`1px solid ${cat.color}88`,background:"rgba(255,255,255,0.04)",color:cat.accent,fontFamily:"'Courier New',monospace",fontSize:"0.7rem",fontWeight:"bold",letterSpacing:"0.1em",cursor:"pointer",textDecoration:"none",display:"flex",alignItems:"center",justifyContent:"center" }}>∞ FREE PLAY</a>
           <button onClick={()=>setShowHelp(true)} style={{width:"28px",height:"28px",borderRadius:"50%",border:"1px solid #1f3320",background:"rgba(74,222,128,0.06)",color:"#4ade80",fontSize:"0.9rem",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>?</button>
         </div>
       </div>
