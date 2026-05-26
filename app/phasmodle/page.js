@@ -438,26 +438,48 @@ function GuessRow({ guessedGhost, answerGhost }) {
   const evidenceMatch = JSON.stringify([...guessedGhost.evidence].sort()) === JSON.stringify([...answerGhost.evidence].sort());
   const abilityMatch = guessedGhost.ability === answerGhost.ability;
 
-  const Cell = ({ label, value, match, wide }) => (
-    <div style={{
-      flex: wide ? 2 : 1,
-      padding:"8px",
-      background: match ? "rgba(74,222,128,0.12)" : "rgba(239,68,68,0.08)",
-      border:`1px solid ${match?"rgba(74,222,128,0.4)":"rgba(239,68,68,0.3)"}`,
-      borderRadius:"6px",
-      transition:"all 0.4s ease",
-      animation:"rowIn 0.4s ease both",
-    }}>
-      <div style={{fontSize:"0.42rem",color:match?"#4ade8077":"#ef444477",letterSpacing:"0.14em",marginBottom:"4px",textTransform:"uppercase"}}>{label}</div>
-      <div style={{fontSize:"0.65rem",color:match?"#4ade80":"#ef4444",fontWeight:"bold",letterSpacing:"0.06em",lineHeight:1.3}}>
-        {Array.isArray(value)
-          ? <div style={{display:"flex",flexWrap:"wrap",gap:"3px"}}>{value.map(e=><EvidenceBadge key={e} label={e}/>)}</div>
-          : value
-        }
+ const Cell = ({ label, value, match, wide, answerEvidence }) => {
+    if (label === "Evidence" && Array.isArray(value) && answerEvidence) {
+      const allMatch = value.every(e => answerEvidence.includes(e)) && value.length === answerEvidence.length;
+      return (
+        <div style={{flex:wide?2:1,padding:"8px",background:allMatch?"rgba(74,222,128,0.12)":"rgba(239,68,68,0.04)",border:`1px solid ${allMatch?"rgba(74,222,128,0.4)":"rgba(239,68,68,0.2)"}`,borderRadius:"6px",animation:"rowIn 0.4s ease both"}}>
+          <div style={{fontSize:"0.42rem",color:allMatch?"#4ade8077":"#ef444477",letterSpacing:"0.14em",marginBottom:"6px",textTransform:"uppercase"}}>Evidence</div>
+          <div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>
+            {value.map(e=>{
+              const matched = answerEvidence.includes(e);
+              const color = EVIDENCE_COLORS[e] || "#aaa";
+              return (
+                <span key={e} style={{
+                  display:"inline-flex",alignItems:"center",gap:"4px",
+                  padding:"3px 8px",borderRadius:"4px",
+                  background: matched ? `${color}33` : "rgba(239,68,68,0.1)",
+                  border: `1px solid ${matched ? color+"88" : "rgba(239,68,68,0.3)"}`,
+                  fontFamily:"'Courier New',monospace",fontSize:"0.52rem",
+                  color: matched ? color : "#ef444488",
+                  letterSpacing:"0.06em",
+                  boxShadow: matched ? `0 0 8px ${color}44` : "none",
+                  transition:"all 0.3s ease",
+                  textDecoration: matched ? "none" : "line-through",
+                }}>
+                  {matched ? "✓" : "✗"} {e}
+                </span>
+              );
+            })}
+          </div>
+          <div style={{marginTop:"5px",fontSize:"0.55rem",color:allMatch?"#4ade8077":"rgba(255,255,255,0.2)",letterSpacing:"0.08em"}}>
+            {value.filter(e=>answerEvidence.includes(e)).length}/{value.length} match
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div style={{flex:wide?2:1,padding:"8px",background:match?"rgba(74,222,128,0.12)":"rgba(239,68,68,0.08)",border:`1px solid ${match?"rgba(74,222,128,0.4)":"rgba(239,68,68,0.3)"}`,borderRadius:"6px",transition:"all 0.4s ease",animation:"rowIn 0.4s ease both"}}>
+        <div style={{fontSize:"0.42rem",color:match?"#4ade8077":"#ef444477",letterSpacing:"0.14em",marginBottom:"4px",textTransform:"uppercase"}}>{label}</div>
+        <div style={{fontSize:"0.65rem",color:match?"#4ade80":"#ef4444",fontWeight:"bold",letterSpacing:"0.06em",lineHeight:1.3}}>{value}</div>
+        <div style={{marginTop:"4px",fontSize:"0.7rem"}}>{match?"✅":"❌"}</div>
       </div>
-      <div style={{marginTop:"4px",fontSize:"0.7rem"}}>{match ? "✅" : "❌"}</div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"4px",animation:"rowIn 0.5s ease both"}}>
@@ -478,7 +500,7 @@ function GuessRow({ guessedGhost, answerGhost }) {
       {/* Attribute cells */}
       <div style={{display:"flex",gap:"4px"}}>
         <Cell label="Speed"    value={guessedGhost.speed}    match={speedMatch}   />
-        <Cell label="Evidence" value={guessedGhost.evidence} match={evidenceMatch} wide />
+        <Cell label="Evidence" value={guessedGhost.evidence} match={evidenceMatch} wide answerEvidence={answerGhost.evidence}/>
         <Cell label="Blink"    value={guessedGhost.blink}    match={blinkMatch}   />
         <Cell label="Ability"  value={guessedGhost.ability}  match={abilityMatch} wide />
       </div>
