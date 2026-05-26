@@ -31,7 +31,7 @@ const categories = [
     id: "griffindle",
     name: "Griffindle",
     subtitle: "Guess the Character",
-    image: "/images/hub/familyguy.png",
+    image: "/images/hub/familyguy3.jpeg",
     emoji: "🍺",
     description: "From Quahog to your screen. Guess the Family Guy character before time runs out.",
     color: "#1565C0",
