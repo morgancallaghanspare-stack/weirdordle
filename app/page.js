@@ -43,7 +43,7 @@ const categories = [
     tag: "FAMILY GUY",
   },
   {
-    id: "fnaf",
+    id: "animatronidle",
     name: "Animatronidle",
     subtitle: "Guess the Animatronic",
     image: "/images/hub/freddy.jpeg",
